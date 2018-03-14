@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #define SIZESTACK 4
 
 int top = -1; // The top of the stack, initialized for an empty stack.
@@ -43,9 +44,9 @@ void push(){
         printf("Can't add another element, because the stack is full\n");
     }else{
         char inputElm;
-        printf("Please add an element to the stack: \n\n");
+        printf("Please add an element to the stack: \n");
         scanf(" %c",&inputElm);
-        printf("Input element is: %c\n",inputElm);
+        printf("Input element is: %c\n\n",inputElm);
         top++;
         stack[top] = inputElm;
     }
@@ -57,28 +58,31 @@ void printAll(){
             printf("Element %d: %c\n",i,stack[i]);
         }
     }else{
-        printf("The stack is empty\n");
+        printf("The stack is empty\n\n");
     }
 }
 
 void printElm(){
     if(top>=0){
-        int elm;
+        int index;
         printf("Which element would you like to print out? Choose from 0 to %d\n",top);
-        scanf(" %d",&elm);
-        if(elm)
-        printf("Element %d: %c\n",elm,stack[elm]);
-    } else{
-        printf("The stack is empty\n");
+        scanf(" %d",&index);
+        if(index > top){
+            printf("No such element. There %s only %d element%c\n\n", (top!=0) ? "are":"is", top+1, (top!=0) ? 's':' ');
+        }else{
+            printf("Element %d: %c\n\n",index,stack[index]);
+        }
+    }else{
+        printf("The stack is empty\n\n");
     }
 }
 
 void pop(){
     if(top>=0){
         top--;
-        printf("The top element deleted.\n");
+        printf("The top element deleted.\n\n");
     }else{
-        printf("There are no elements to remove.\n");
+        printf("There are no elements to remove.\n\n");
     }
 }
 
