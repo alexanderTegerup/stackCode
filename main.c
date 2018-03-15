@@ -1,6 +1,13 @@
+/*
+ * alexStack.c
+ *
+ *  Created on: Mar 15, 2018
+ *      Author: ATESXB
+ */
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+
 #define SIZESTACK 4
 
 int top = -1; // The top of the stack, initialized for an empty stack.
@@ -11,15 +18,19 @@ void printAll();
 void printElm();
 void pop();
 
-
 int main()
 {
     int option;
     int runProgram = 1;
 
+    //printf(" 1: Add an element to the stack\n 2: Delete an element on the stack\n 3: Print out all elements on the stack\n 4: Print out a single element\n 5: Exit\n");
+    //scanf("%d\n",&option);
+    //fgets(option,1,stdin);
     while(runProgram){
+
         printf("1: Add an element to the stack\n 2: Delete an element on the stack\n 3: Print out all elements on the stack\n 4: Print out a single element\n 5: Exit\n");
-        scanf(" %d", &option);
+        scanf("%d",&option);
+        getchar();
 
             switch(option){
                 case 1 : push();
@@ -35,11 +46,12 @@ int main()
                 default : printf("You have to enter an integer between 1-5.\n");
             }
     }
-
     return 0;
 }
 
+
 void push(){
+
     if(top+1 >= SIZESTACK){
         printf("Can't add another element, because the stack is full\n");
     }else{
@@ -52,6 +64,7 @@ void push(){
     }
 }
 
+
 void printAll(){
     if(top>=0){
         for(int i=0; i<=top; i++){
@@ -62,9 +75,12 @@ void printAll(){
     }
 }
 
+
 void printElm(){
+
     if(top>=0){
         int index;
+
         printf("Which element would you like to print out? Choose from 0 to %d\n",top);
         scanf(" %d",&index);
         if(index > top){
@@ -77,7 +93,9 @@ void printElm(){
     }
 }
 
+
 void pop(){
+
     if(top>=0){
         top--;
         printf("The top element deleted.\n\n");
