@@ -27,9 +27,6 @@ int main()
     int option;
     int runProgram = 1;
 
-    //printf(" 1: Add an element to the stack\n 2: Delete an element on the stack\n 3: Print out all elements on the stack\n 4: Print out a single element\n 5: Exit\n");
-    //scanf("%d\n",&option);
-    //fgets(option,1,stdin);
     while(runProgram){
 
         printf(" 1: Add an element to the stack\n 2: Delete an element on the stack\n 3: Print out all elements on the stack\n 4: Print out a single element\n 5: Exit\n");
