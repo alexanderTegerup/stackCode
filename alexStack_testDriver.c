@@ -12,11 +12,16 @@
 #include "alexStack.c"
 
 void test_push();
-
+void test_printAll();
+void test_printElm();
+void test_pop();
+void test_isFull();
+void test_isEmpty();
 
 int main(){
 
     test_push();
+    test_pop();
 
     return 0;
 }
@@ -59,6 +64,47 @@ void test_push(){
     }
 
 }
+
+void test_pop(){
+
+    // *** Pop an element from the stack ***
+
+    // Arrange
+    char elm0, elm1;
+    elm0 = 'a';
+    elm1 = 'b';
+    stack[0] = elm0;
+    stack[1] = elm1;
+    top = 1; 
+
+    // Act
+    pop();
+
+    // Assert
+    if(top==0 && stack[0]==elm0){
+        printf("Pop from stack: succeed\n");
+    }else{
+	printf("Pop from stack: failed\n");
+    }
+
+
+    // *** Don't pop an element from an empty stack ***
+    
+    // Arrange
+    top = -1;
+
+    // Act
+    pop();
+
+    // Arrange
+    if(top==-1){
+        printf("Don't pop an element from an empty stack: succeed\n");
+    }else{
+        printf("Don't pop an element from an empty stack: failed\n");
+    }
+
+}
+
 
 
 

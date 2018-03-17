@@ -51,7 +51,7 @@ int main()
 }
 */
 
-char push(char testInput){// Added argument for testing
+char push(char testInput){// Changed for testing
 
     if(isFull()){
         printf("Can't add another element, because the stack is full\n");
