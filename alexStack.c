@@ -70,12 +70,14 @@ char push(char testInput){// Changed for testing
 }
 
 
-void printAll(){
+void printAll(){ 
 	if(isEmpty()){
 	        printf("The stack is empty\n\n");
-	    }
+	    }else{
+	    printf("The element%s in the stack %s:\n",top>0 ? "s":"",top>0 ? "are":"is");
+        }
 	while(!isEmpty()){
-		printf("Element: %c\n",stack[top]);
+		printf("%c\n",stack[top]);
 		pop();
 	}
 }

@@ -24,6 +24,7 @@ int main(){
     test_pop();
     test_isFull();
     test_isEmpty();
+    test_printAll();
 
     return 0;
 }
@@ -142,6 +143,45 @@ void test_isEmpty(){
     }
 
 }
+
+void test_printAll(){
+
+    printf("Testing the printAll function ...\n");
+
+    // *** Printing out two elements ***
+
+    //Arrange
+    char elm0, elm1;
+    elm0 = 'a';
+    elm1 = 'b';
+    stack[0] = elm0;
+    stack[1] = elm1;
+    top = 1;
+
+    //Act
+    printAll();
+
+    //Assert
+    printf("'printAll' works if '%c' and '%c' is printed out above this text\n",elm1,elm0);
+
+
+    // *** Printing out an empty stack ***
+
+    //Arrange
+    top = -1;
+
+    //Act
+    printAll();
+
+    //Assert
+    printf("'printAll' works if no elements are printed out above.\n");
+
+}
+
+
+
+
+
 
 
 
