@@ -16,7 +16,7 @@ char stack[SIZESTACK];
 
 char push(char);
 void printAll();
-void printElm();
+void printElm(int);
 void pop();
 bool isFull();
 bool isEmpty();
@@ -83,15 +83,15 @@ void printAll(){
 }
 
 
-void printElm(){
+void printElm(int testIndex){ // Changed for testing purposes
 
     if(!isEmpty()){
-        int index;
+        int index = testIndex; // Changed for testing purposes
         printf("Choose the index of the element would you like to print out? Choose an index between 0 to %d:\n",top);
-        scanf("%d",&index);
-        getchar();
+//        scanf("%d",&index);
+//        getchar();
         if(index > top || index < 0){
-            printf("Index is out of bounds. You must choose an index from 0 to %d.\n\n",top);
+            printf("Error: index is out of bounds. You must choose an index from 0 to %d.\n\n",top);
         }else{
 	    while(top!=index){
 	        pop();

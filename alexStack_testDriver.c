@@ -25,6 +25,7 @@ int main(){
     test_isFull();
     test_isEmpty();
     test_printAll();
+    test_printElm();
 
     return 0;
 }
@@ -174,12 +175,78 @@ void test_printAll(){
     printAll();
 
     //Assert
-    printf("'printAll' works if no elements are printed out above.\n");
+    printf("'printAll' works if a message saying that the stack is empty is printed out above.\n");
 
 }
 
 
+void test_printElm(){
 
+    printf("Testing the printElm function ...\n");
+
+    // *** Printing out element two out of three elements ***
+
+    //Arrange
+    char elm0, elm1, elm2;
+    elm0 = 'a';
+    elm1 = 'b';
+    elm2 = 'c';
+
+    int testIndex=1;
+    stack[0] = elm0;
+    stack[1] = elm1;
+    stack[2] = elm2;
+    top = 2;
+
+    //Act
+    printElm(testIndex);
+
+    //Assert
+    if(top == testIndex){
+        printf("'printElm' works if '%c' is printed out above this text\n",elm1);
+    }else{ printf("Error in printElm\n"); }
+
+
+    // *** If the user enters an index greater than the top of the stack ***
+
+    //Arrange
+    top = 2;
+    testIndex = top+1;
+
+    //Act
+    printElm(testIndex);
+
+    //Assert
+    printf("'printElm' works if an error message is given above.\n");
+
+
+    // *** If the user enters an index less than zero ***
+
+    //Arrange
+    top = 2;
+    testIndex = -1;
+
+    //Act
+    printElm(testIndex);
+
+    //Assert
+    printf("'printElm' works if an error message is given above.\n");
+
+    
+    // *** If the stack is empty ***
+
+    //Arrange
+    top = -1;
+    testIndex = 1;
+
+    //Act
+    printElm(testIndex);
+
+    //Assert
+    printf("'printElm' works if a message saying that the stack is empty is given above.\n");
+
+
+}
 
 
 
