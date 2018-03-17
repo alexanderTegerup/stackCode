@@ -36,14 +36,17 @@ void test_push(){
     // *** Push to the stack ***   
 
     // Arrange
-    char inputChar,returnedChar;
-    inputChar = 'a' + (rand()%26);
+    int indexPush = 0; //The index in the stack where an element should be inserted. 
+    top = indexPush-1;
+
+    char inputChar;
+    inputChar = 'a' + (rand()%26); //Inserting a random character from a-z. 
 
     //Act
-    returnedChar =  push(inputChar);
+    push(inputChar);
 
     //Asert
-    if(inputChar == returnedChar){
+    if(inputChar == stack[indexPush] && top==indexPush){
         printf("Push to stack: succeed\n");
     }else{
         printf("Push to stack: failed\n");
@@ -54,17 +57,22 @@ void test_push(){
     // *** Don't add an element to a full stack ***
 
     // Arrange
-    inputChar = '1';
-    top = SIZESTACK-1; // Making the stack full
+    inputChar = 'a';
+    int maxIndex = SIZESTACK-1;
+    top = maxIndex; // Making the stack full
+    stack[maxIndex] = 'b';
 
     // Act
-    returnedChar =  push(inputChar);
+    push(inputChar);
 
     // Assert
-    if(inputChar == returnedChar){
-        printf("Don't add an element to a full stack: failed\n");
+
+// Check so that 'top' hasn't increased and that the
+// element at the top of the stack won't change:
+    if(maxIndex == top && inputChar != stack[maxIndex]){ 
+       printf("Don't add an element to a full stack: succeed\n");
     }else{
-        printf("Don't add an element to a full stack: succeed\n");
+        printf("Don't add an element to a full stack: failed\n");
     }
 
 }
