@@ -96,7 +96,7 @@ void test_pop(){
     // Act
     pop();
 
-    // Arrange
+    // Assert
     if(top==-1){
         printf("Don't pop an element from an empty stack: succeed\n");
     }else{
