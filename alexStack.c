@@ -116,7 +116,7 @@ bool isFull(){
 }
 
 bool isEmpty(){
-    return (top<0);
+    return (top==-1);
 }
 
 

@@ -22,6 +22,8 @@ int main(){
 
     test_push();
     test_pop();
+    test_isFull();
+    test_isEmpty();
 
     return 0;
 }
@@ -105,9 +107,41 @@ void test_pop(){
 
 }
 
+void test_isFull(){
 
+    //Arrange
+    top = SIZESTACK-1; // Making the stack full
+    bool full;
 
+    // Act
+    full = isFull();
 
+    // Assert
+    if(full){
+	printf("Testing the function that returns true if the stack is full: succeed\n");
+    }else{
+	printf("Testing the function that returns true if the stack is full: failed\n");
+    }
+
+}
+
+void test_isEmpty(){
+
+    //Arrange
+    top = -1; // Making the stack empty
+    bool empty;
+
+    // Act
+    empty = isEmpty();
+
+    // Assert
+    if(empty){
+        printf("Testing the function that returns true if the stack is empty: succeed\n");
+    }else{
+        printf("Testing the function that returns true if the stack is empty: failed\n");
+    }
+
+}
 
 
 
