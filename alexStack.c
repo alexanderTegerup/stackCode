@@ -14,14 +14,14 @@
 int top = -1; // The top of the stack, initialized for an empty stack.
 char stack[SIZESTACK];
 
-void push();
+char push(char);
 void printAll();
 void printElm();
 void pop();
 bool isFull();
 bool isEmpty();
 
-
+/*
 int main()
 {
     int option;
@@ -49,20 +49,23 @@ int main()
     }
     return 0;
 }
+*/
 
-
-void push(){
+char push(char testInput){// Added argument for testing
 
     if(isFull()){
         printf("Can't add another element, because the stack is full\n");
+	return '0'; // Added for testing
     }else{
-        char inputElm;
+        char inputElm;// Added for testing
+	inputElm = testInput;// Added for testing
         printf("Please add an element to the stack: \n");
-        scanf("%c",&inputElm);
-        getchar();
+        //scanf("%c",&inputElm);
+        //getchar();
         printf("You inserted the element: %c\n\n",inputElm);
         top++;
         stack[top] = inputElm;
+	return stack[top];// Added for testing
     }
 }
 

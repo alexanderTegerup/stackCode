@@ -24,7 +24,8 @@ int main(){
 
 void test_push(){
 
-    // *** Add an element to the stack ***   
+    // *** Push to the stack ***   
+
     // Arrange
     char inputChar,returnedChar;
     inputChar = 'a' + (rand()%26);
@@ -39,20 +40,22 @@ void test_push(){
         printf("Push to stack: failed\n");
     }
 
-    // *** Don't add an element if the stack is full ***
+
+
+    // *** Don't add an element to a full stack ***
+
     // Arrange
-    inputChar = 'a';
-    top = SIZESTACK-1;
-    returnedChar = 'b';
+    inputChar = '1';
+    top = SIZESTACK-1; // Making the stack full
 
     // Act
     returnedChar =  push(inputChar);
 
     // Assert
-    if(inputChar != returnedChar){
-        printf("Check if stack is full: succeed\n");
+    if(inputChar == returnedChar){
+        printf("Don't add an element to a full stack: failed\n");
     }else{
-        printf("Check if stack is full: failed\n");
+        printf("Don't add an element to a full stack: succeed\n");
     }
 
 }
