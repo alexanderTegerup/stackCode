@@ -3,6 +3,10 @@
  *
  *  Created on: Mar 17, 2018
  *      Author: ATESXB
+
+In this queue data structure, an element is entering the queue at the tail and exit at the head.
+
+
  */
 #include <stdio.h>
 #include <stdlib.h>
@@ -12,6 +16,8 @@
 void enqueue();
 void dequeue();
 void peek();
+bool isEmpty();
+
 
 int main(){
 
@@ -41,11 +47,11 @@ int main(){
 }
 
 
-void enqueue(){
+void enqueue(){ // Enqueue element at the tail
 
 }
 
-void dequeue(){
+void dequeue(){ // Dequeue element at the head
 
 }
 
