@@ -85,11 +85,9 @@ void dequeue(){ // Dequeue element at the head
     head = tmp; // Now the second node has become the first node.
 }
 
-// Returns the value of the front element
+// Prints the value of the front element, without dequeuing it.
 void peek(){
     printf("The first element in the queue is: %c\n",head->element);
-    printf("The last element in the queue is: %c\n",tail->element);
-
 }
 
 int quit(){
