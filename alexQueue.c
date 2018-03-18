@@ -17,14 +17,17 @@ void enqueue();
 void dequeue();
 void peek();
 bool isEmpty();
+int quit();
 
+// Each node contains an element and a pointer to the node behind in the queue
 struct node{
     char element;
-    struct node* pPrevNode;
+    struct node* pNextNode;
 };
 
 
-
+struct node *head = NULL;
+struct node *tail = NULL;
 int main(){
 
     int option;
@@ -44,7 +47,7 @@ int main(){
                     break;
                 case 3 : peek();
                     break;
-                case 4 : runProgram=0;
+                case 4 : runProgram=quit();
                     break;
                 default : printf("You have to enter an integer between 1-4.\n");
             }
@@ -56,7 +59,22 @@ int main(){
 
 
 void enqueue(){ // Enqueue element at the tail
+    struct node* pNewNode;
+    char inputElm;
+    pNewNode = (struct node*) malloc( sizeof(struct node) );
 
+    printf("Enter element to enqueue: \n");
+    scanf("%c",&inputElm);
+    getchar();
+
+    pNewNode->element = inputElm;
+    printf("Input: %c\n",inputElm);
+
+    if(head == NULL && tail==NULL){
+        head = pNewNode;
+        tail = pNewNode;
+        return;
+    }
 }
 
 void dequeue(){ // Dequeue element at the head
@@ -67,8 +85,11 @@ void peek(){
 
 }
 
-
-
+int quit(){
+    free(head);
+    free(tail);
+    return 0;
+}
 
 
 
