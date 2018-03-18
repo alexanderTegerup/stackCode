@@ -101,8 +101,12 @@ void dequeue(){ // Dequeue element at the head
 
 // Prints the value of the front element, without dequeuing it.
 void peek(){
-    printf("The first element in the queue is: %c\n",head->element);
-    printf("The first element in the queue is: %c\n",tail->element);
+
+    if(isEmpty()){
+        printf("Nothing to see here. The queue is empty.\n");
+    }else{
+        printf("The first element in the queue is: %c\n",head->element);
+    }
 }
 
 int quit(){
