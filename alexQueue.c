@@ -19,7 +19,7 @@ void peek();
 bool isEmpty();
 int quit();
 
-// Each node contains an element and a pointer to the node behind in the queue
+// Each node contains an element and a pointer to the node behind in the queue (pNextNode)
 struct node{
     char element;
     struct node* pNextNode;
@@ -70,10 +70,12 @@ void enqueue(){ // Enqueue element at the tail
     pNewNode->element = inputElm;
     printf("Input: %c\n",inputElm);
 
-    if(head == NULL && tail==NULL){
+    if(isEmpty()){
         head = pNewNode;
         tail = pNewNode;
-        return;
+    }else{
+        tail->pNextNode = pNewNode;
+        tail = pNewNode;
     }
 }
 
@@ -81,7 +83,9 @@ void dequeue(){ // Dequeue element at the head
 
 }
 
+// Returns the value of the front element
 void peek(){
+
 
 }
 
@@ -91,7 +95,9 @@ int quit(){
     return 0;
 }
 
-
+bool isEmpty(){
+    return (head == NULL && tail==NULL);
+}
 
 
 
