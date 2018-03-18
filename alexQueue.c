@@ -18,11 +18,18 @@ void dequeue();
 void peek();
 bool isEmpty();
 
+struct node{
+    char element;
+    struct node* pPrevNode;
+};
+
+
 
 int main(){
 
     int option;
     int runProgram = 1;
+
 
     while(runProgram){
 
@@ -42,6 +49,7 @@ int main(){
                 default : printf("You have to enter an integer between 1-4.\n");
             }
     }
+
     return 0;
 
 }
@@ -58,8 +66,6 @@ void dequeue(){ // Dequeue element at the head
 void peek(){
 
 }
-
-
 
 
 
