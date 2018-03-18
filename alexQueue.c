@@ -80,12 +80,15 @@ void enqueue(){ // Enqueue element at the tail
 }
 
 void dequeue(){ // Dequeue element at the head
-
+    struct node* tmp = head->pNextNode; // tmp points to the second node in the queue
+    free(head); // Free memory from the first node.
+    head = tmp; // Now the second node has become the first node.
 }
 
 // Returns the value of the front element
 void peek(){
-
+    printf("The first element in the queue is: %c\n",head->element);
+    printf("The last element in the queue is: %c\n",tail->element);
 
 }
 
