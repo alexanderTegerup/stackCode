@@ -16,7 +16,9 @@ In this queue data structure, an element is entering the queue at the tail and e
 void enqueue();
 void dequeue();
 void peek();
+
 bool isEmpty();
+bool oneNodeLeft();
 int quit();
 
 // Each node contains an element and a pointer to the node behind in the queue (pNextNode)
@@ -69,6 +71,7 @@ void enqueue(){ // Enqueue element at the tail
 
     pNewNode->element = inputElm;
     printf("Input: %c\n",inputElm);
+    pNewNode->pNextNode=NULL;
 
     if(isEmpty()){
         head = pNewNode;
@@ -80,14 +83,26 @@ void enqueue(){ // Enqueue element at the tail
 }
 
 void dequeue(){ // Dequeue element at the head
-    struct node* tmp = head->pNextNode; // tmp points to the second node in the queue
-    free(head); // Free memory from the first node.
-    head = tmp; // Now the second node has become the first node.
+
+    if(isEmpty()){
+        printf("Nothing to dequeue, the queue is empty.\n");
+    }
+    else if(oneNodeLeft()){
+        free(head);
+        head=NULL;
+        tail=NULL;
+    }else{
+        struct node* tmp = head->pNextNode; // tmp points to the second node in the queue
+        free(head); // Free memory from the first node.
+        head = tmp; // Now the second node has become the first node.
+    }
+
 }
 
 // Prints the value of the front element, without dequeuing it.
 void peek(){
     printf("The first element in the queue is: %c\n",head->element);
+    printf("The first element in the queue is: %c\n",tail->element);
 }
 
 int quit(){
@@ -100,5 +115,7 @@ bool isEmpty(){
     return (head == NULL && tail==NULL);
 }
 
-
+bool oneNodeLeft(){
+    return (head->pNextNode==NULL);
+}
 
