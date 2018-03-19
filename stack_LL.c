@@ -59,6 +59,19 @@ int main(){
 
 void push(){
 
+    char elm;
+    printf("Enter element on the stack: \n");
+    scanf("%c",&elm);
+    getchar();
+
+    if(isEmpty){
+	top = (struct node*) malloc( sizeof(struct node) );
+	top->element = elm;
+        top->nodeBelow = NULL;
+    }else{
+
+    }
+
 }
 
 void pop(){
@@ -70,7 +83,11 @@ void printElement(){
 }
 
 void printAll(){
+    printf("Top element: %c\n",top->element);
+}
 
+bool isEmpty(){
+    return (top == NULL);
 }
 
 int quit(){
