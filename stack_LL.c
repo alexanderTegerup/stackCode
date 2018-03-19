@@ -19,6 +19,7 @@ void printElement();
 void printAll();
 
 bool isEmpty();
+bool oneElementLeft();
 int quit();
 
 struct node{
@@ -64,7 +65,7 @@ void push(){
     scanf("%c",&elm);
     getchar();
 
-    if(isEmpty){
+    if(isEmpty()){
 	top = (struct node*) malloc( sizeof(struct node) );
 	top->element = elm;
         top->pNodeBelow = NULL;
@@ -81,6 +82,19 @@ void push(){
 
 void pop(){
 
+    if(isEmpty()){
+	printf("Nothing to pop. The stack is empty.\n");
+    }
+    else if(oneElementLeft()){
+	free(top);
+	top=NULL;
+    }
+    else{
+	struct node* tmp = top;
+	top = tmp->pNodeBelow;
+	free(tmp);
+    }
+
 }
 
 void printElement(){
@@ -88,11 +102,20 @@ void printElement(){
 }
 
 void printAll(){
-    printf("Top element: %c\n",top->element);
+
+    if(isEmpty()){
+	printf("Stack is empty. Hence, nothing can be printed out.\n");
+    }else{
+        printf("Top element: %c\n",top->element);
+    }
 }
 
 bool isEmpty(){
     return (top == NULL);
+}
+
+bool oneElementLeft(){
+    return (top->pNodeBelow == NULL);
 }
 
 int quit(){
