@@ -23,7 +23,7 @@ int quit();
 
 struct node{
     char element;
-    struct node* nodeBelow;
+    struct node* pNodeBelow;
 };
 
 struct node* top = NULL;
@@ -48,7 +48,7 @@ int main(){
                     break;
                 case 4 : printElement();
                     break;
-                case 5 : runProgram=0;
+                case 5 : runProgram = quit();
                     break;
                 default : printf("You have to enter an integer between 1-5.\n");
             }
@@ -67,9 +67,14 @@ void push(){
     if(isEmpty){
 	top = (struct node*) malloc( sizeof(struct node) );
 	top->element = elm;
-        top->nodeBelow = NULL;
+        top->pNodeBelow = NULL;
     }else{
+	struct node* pTopNode;
+	pTopNode = (struct node*) malloc( sizeof(struct node) );
 
+	pTopNode->element = elm;
+	pTopNode->pNodeBelow = top;
+	top = pTopNode;
     }
 
 }
@@ -91,6 +96,7 @@ bool isEmpty(){
 }
 
 int quit(){
-
+    free(top);
+    return 0;
 }
 
