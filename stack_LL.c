@@ -15,7 +15,7 @@
 
 void push();
 void pop();
-void printElement();
+void printElm();
 void printAll();
 
 bool isEmpty();
@@ -28,7 +28,7 @@ struct node{
 };
 
 struct node* top = NULL;
-int elementCount=0;
+
 
 int main(){
 
@@ -37,7 +37,7 @@ int main(){
 
     while(runProgram){
 
-        printf(" 1: Add an element to the stack\n 2: Delete an element on the stack\n 3: Print out all elements on the stack\n 4: Print out a single element\n 5: Exit\n");
+        printf(" 1: Add an element to the stack\n 2: Delete an element on the stack\n 3: Print out all elements on the stack\n 4: Exit\n");
         scanf("%d",&option);
         getchar();
 
@@ -48,15 +48,14 @@ int main(){
                     break;
                 case 3 : printAll();
                     break;
-                case 4 : printElement();
-                    break;
-                case 5 : runProgram = quit();
+                case 4 : runProgram = quit();
                     break;
                 default : printf("You have to enter an integer between 1-5.\n");
             }
     }
     return 0;
 }
+
 
 void push(){
 
@@ -69,15 +68,13 @@ void push(){
 	top = (struct node*) malloc( sizeof(struct node) );
 	top->element = elm;
         top->pNodeBelow = NULL;
-	elementCount++;
     }else{
 	struct node* pTopNode;
 	pTopNode = (struct node*) malloc( sizeof(struct node) );
 
 	pTopNode->element = elm;
 	pTopNode->pNodeBelow = top;
-	top = pTopNode;
-	elementCount++;
+	top = pTopNode;	
     }
 
 }
@@ -89,40 +86,15 @@ void pop(){
     }
     else if(oneElementLeft()){
 	free(top);
-	top=NULL;
-	elementCount--;
+	top=NULL;	
     }
     else{
 	struct node* tmp = top;
 	top = tmp->pNodeBelow;
 	free(tmp);
-	elementCount--;
     }
-
 }
 
-void printElement(){
-
-    if(isEmpty()){
-	printf("Stack is empty. Hence, nothing can be printed out.\n");
-	return;
-    }
-
-    int index;
-    printf("Enter which element on the stack that you wish to print out. Choose between 1 - %d\n",elementCount);
-    scanf("%d",&index);
-    getchar();
-
-    if(index < 1 || index > elementCount){
-	printf("You have to enter an index between 1 - %d\n",elementCount);
-    }else{
-	while(elementCount>index){
-	    pop();
-	}
-	printf("The element is: %c\n",top->element);
-    }
-
-}
 
 void printAll(){
 

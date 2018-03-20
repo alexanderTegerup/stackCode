@@ -16,7 +16,6 @@ char stack[SIZESTACK];
 
 void push(char);
 void printAll();
-void printElm(int);
 void pop();
 bool isFull();
 bool isEmpty();
@@ -29,7 +28,7 @@ int main()
 
     while(runProgram){
 
-        printf(" 1: Add an element to the stack\n 2: Delete an element on the stack\n 3: Print out all elements on the stack\n 4: Print out a single element\n 5: Exit\n");
+        printf(" 1: Add an element to the stack\n 2: Delete an element on the stack\n 3: Print out all elements on the stack\n 4: Exit\n");
         scanf("%d",&option);
         getchar();
 
@@ -40,9 +39,7 @@ int main()
                     break;
                 case 3 : printAll();
                     break;
-                case 4 : printElm();
-                    break;
-                case 5 : runProgram=0;
+                case 4 : runProgram=0;
                     break;
                 default : printf("You have to enter an integer between 1-5.\n");
             }
@@ -58,9 +55,9 @@ void push(char testInput){// Changed for testing
     }else{
         char inputElm;
 	inputElm = testInput;// Added for testing
-        printf("Please add an element to the stack: \n");
-        //scanf("%c",&inputElm);
-        //getchar();
+//        printf("Please add an element to the stack: \n");
+//        scanf("%c",&inputElm);
+//        getchar();
         printf("You inserted the element: %c\n\n",inputElm);
         top++;
         stack[top] = inputElm;
@@ -81,27 +78,6 @@ void printAll(){
 }
 
 
-void printElm(int testIndex){ // Changed for testing purposes
-
-    if(!isEmpty()){
-        int index = testIndex; // Changed for testing purposes
-        printf("Choose the index of the element would you like to print out? Choose an index between 0 to %d:\n",top);
-//        scanf("%d",&index);
-//        getchar();
-        if(index > top || index < 0){
-            printf("Error: index is out of bounds. You must choose an index from 0 to %d.\n\n",top);
-        }else{
-	    while(top!=index){
-	        pop();
-	    }
-	    printf("Element %d: %c\n\n",index,stack[index]);
-	}
-    }else{
-        printf("The stack is empty\n\n");
-    }
-}
-
-
 void pop(){
 
     if(top>=0){
@@ -111,9 +87,11 @@ void pop(){
     }
 }
 
+
 bool isFull(){
     return (top+1 >= SIZESTACK);
 }
+
 
 bool isEmpty(){
     return (top==-1);
