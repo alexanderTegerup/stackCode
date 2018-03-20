@@ -28,6 +28,7 @@ struct node{
 };
 
 struct node* top = NULL;
+int elementCount=0;
 
 int main(){
 
@@ -54,7 +55,6 @@ int main(){
                 default : printf("You have to enter an integer between 1-5.\n");
             }
     }
-
     return 0;
 }
 
@@ -69,6 +69,7 @@ void push(){
 	top = (struct node*) malloc( sizeof(struct node) );
 	top->element = elm;
         top->pNodeBelow = NULL;
+	elementCount++;
     }else{
 	struct node* pTopNode;
 	pTopNode = (struct node*) malloc( sizeof(struct node) );
@@ -76,6 +77,7 @@ void push(){
 	pTopNode->element = elm;
 	pTopNode->pNodeBelow = top;
 	top = pTopNode;
+	elementCount++;
     }
 
 }
@@ -88,16 +90,37 @@ void pop(){
     else if(oneElementLeft()){
 	free(top);
 	top=NULL;
+	elementCount--;
     }
     else{
 	struct node* tmp = top;
 	top = tmp->pNodeBelow;
 	free(tmp);
+	elementCount--;
     }
 
 }
 
 void printElement(){
+
+    if(isEmpty()){
+	printf("Stack is empty. Hence, nothing can be printed out.\n");
+	return;
+    }
+
+    int index;
+    printf("Enter which element on the stack that you wish to print out. Choose between 1 - %d\n",elementCount);
+    scanf("%d",&index);
+    getchar();
+
+    if(index < 1 || index > elementCount){
+	printf("You have to enter an index between 1 - %d\n",elementCount);
+    }else{
+	while(elementCount>index){
+	    pop();
+	}
+	printf("The element is: %c\n",top->element);
+    }
 
 }
 
@@ -106,7 +129,10 @@ void printAll(){
     if(isEmpty()){
 	printf("Stack is empty. Hence, nothing can be printed out.\n");
     }else{
-        printf("Top element: %c\n",top->element);
+        while(!isEmpty()){
+            printf("Top element: %c\n",top->element);
+	    pop();
+	}
     }
 }
 
