@@ -13,9 +13,8 @@
 
 
 
-void push();
+void push(char);
 void pop();
-void printElm();
 void printAll();
 
 bool isEmpty();
@@ -29,7 +28,13 @@ struct node{
 
 struct node* top = NULL;
 
+//Methods for testing
+char getTop();
+void reset();
+void addTestElements(char);
+// --------------------
 
+/*
 int main(){
 
     int option;
@@ -55,14 +60,15 @@ int main(){
     }
     return 0;
 }
+*/
 
-
-void push(){
+void push(char testInput){ // Added argumnet for testing purposes
 
     char elm;
-    printf("Enter element on the stack: \n");
-    scanf("%c",&elm);
-    getchar();
+    elm = testInput; // Added for testing 
+//    printf("Enter element on the stack: \n");
+ //   scanf("%c",&elm);
+  //  getchar();
 
     if(isEmpty()){
 	top = (struct node*) malloc( sizeof(struct node) );
@@ -120,4 +126,30 @@ int quit(){
     free(top);
     return 0;
 }
+
+
+// *** Testing inteface ***
+
+char getTop(){
+    return top->element;
+}
+
+void reset(){ // Makes the stack empty
+
+    // To do here: Free memeory if there are any nodes on the stack!
+    struct node* top = NULL;
+}
+
+void addTestElements(char inputChar){
+    struct node* firstNode = (struct node*) malloc( sizeof(struct node) );
+    firstNode->element = inputChar;
+    firstNode->pNodeBelow = NULL;
+
+    struct node* secondNode = (struct node*) malloc( sizeof(struct node) );
+    secondNode->element = 'a';
+    secondNode->pNodeBelow = firstNode;
+
+    top = secondNode;
+}
+
 

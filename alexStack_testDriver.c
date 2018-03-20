@@ -9,8 +9,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "alexStack.c"
-//#include "stack_LL.c"
+//#include "alexStack.c"
+#include "stack_LL.c"
 
 void test_push();
 void test_printAll();
@@ -22,9 +22,9 @@ int main(){
 
     test_push();
     test_pop();
-    test_isFull();
-    test_isEmpty();
-    test_printAll();
+  //  test_isFull();
+   // test_isEmpty();
+    //test_printAll();
 
     return 0;
 }
@@ -35,70 +35,47 @@ void test_push(){
     // *** Push to the stack ***   
 
     // Arrange
-    int indexPush = 0; //The index in the stack where an element should be inserted. 
-    top = indexPush-1;
 
+    reset();
     char inputChar;
     inputChar = 'a' + (rand()%26); //Inserting a random character from a-z. 
 
     //Act
-    push(inputChar);
+    push(inputChar); //Push to the top of the stack. 
 
     //Asert
-    if(inputChar == stack[indexPush] && top==indexPush){
+    if( inputChar == getTop() ){
         printf("Push to stack: succeed\n");
     }else{
         printf("Push to stack: failed\n");
     }
 
-
-
-    // *** Don't add an element to a full stack ***
-
-    // Arrange
-    inputChar = 'a';
-    int maxIndex = SIZESTACK-1;
-    top = maxIndex; // Making the stack full
-    stack[maxIndex] = 'b';
-
-    // Act
-    push(inputChar);
-
-    // Assert
-
-// Check so that 'top' hasn't increased and that the
-// element at the top of the stack won't change:
-    if(maxIndex == top && inputChar != stack[maxIndex]){ 
-       printf("Don't add an element to a full stack: succeed\n");
-    }else{
-        printf("Don't add an element to a full stack: failed\n");
-    }
-
+    // Add to a full stack
 }
+
 
 void test_pop(){
 
     // *** Pop an element from the stack ***
 
     // Arrange
-    char elm0, elm1;
-    elm0 = 'a';
-    elm1 = 'b';
-    stack[0] = elm0;
-    stack[1] = elm1;
-    top = 1; 
+    reset();
+    char inputChar;
+    inputChar = 'a' + (rand()%26); //Inserting a random character from a-z.
+    addTestElements(inputChar);
 
     // Act
     pop();
 
     // Assert
-    if(top==0 && stack[0]==elm0){
+    if(getTop() == inputChar){
         printf("Pop from stack: succeed\n");
     }else{
 	printf("Pop from stack: failed\n");
     }
 
 
+/*
     // *** Don't pop an element from an empty stack ***
     
     // Arrange
@@ -114,8 +91,10 @@ void test_pop(){
         printf("Don't pop an element from an empty stack: failed\n");
     }
 
+*/
 }
 
+/*
 void test_isFull(){
 
     //Arrange
@@ -186,6 +165,6 @@ void test_printAll(){
 
 }
 
-
+*/
 
 

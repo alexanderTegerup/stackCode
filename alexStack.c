@@ -14,13 +14,17 @@
 int top = -1; // The top of the stack, initialized for an empty stack.
 char stack[SIZESTACK];
 
-void push();
+void push(char);
 void printAll();
 void pop();
 bool isFull();
 bool isEmpty();
 
-
+//Methods for testing
+char getTop();
+void reset();
+void addTestElements(char);
+/*
 int main()
 {
     int option;
@@ -41,23 +45,23 @@ int main()
                     break;
                 case 4 : runProgram=0;
                     break;
-                default : printf("You have to enter an integer between 1-5.\n");
+                default : printf("You have to enter an integer between 1-4.\n");
             }
     }
     return 0;
 }
+*/
 
-
-void push(){ //char testInput){// Changed for testing
+void push(char testInput){// Changed for testing
 
     if(isFull()){
         printf("Can't add another element, because the stack is full\n");
     }else{
         char inputElm;
-//	inputElm = testInput;// Added for testing
-        printf("Please add an element to the stack: \n");
-        scanf("%c",&inputElm);
-        getchar();
+	inputElm = testInput;// Added for testing
+//        printf("Please add an element to the stack: \n");
+ //       scanf("%c",&inputElm);
+//        getchar();
         printf("You inserted the element: %c\n\n",inputElm);
         top++;
         stack[top] = inputElm;
@@ -92,10 +96,30 @@ bool isFull(){
     return (top+1 >= SIZESTACK);
 }
 
-
 bool isEmpty(){
     return (top==-1);
 }
+
+
+// *** Testing inteface ***
+
+char getTop(){
+    return stack[top];
+}
+
+void reset(){ // Makes the stack empty
+    int top = -1;    
+}
+
+void addTestElements(char inputChar){
+    stack[0] = inputChar;
+    stack[1] = 'a';
+    top = 1;
+}
+
+
+
+
 
 
 
