@@ -23,7 +23,7 @@ bool isEmpty();
 //Methods for testing
 char getTop();
 void makeStackEmpty();
-void addTestElements(char);
+void addTestElements(char,int);
 int countElements();
 /*
 int main()
@@ -109,13 +109,17 @@ char getTop(){
 }
 
 void makeStackEmpty(){ // Makes the stack empty
-    int top = -1;    
+    top = -1;    
 }
 
-void addTestElements(char inputChar){
-    stack[0] = inputChar;
-    stack[1] = 'a';
-    top = 1;
+void addTestElements(char inputChar, int numElements){
+
+    for(int i=1; i<numElements; i++){
+	top++;
+        stack[top] = 'a' + (rand()%26);
+    }
+    top++;
+    stack[top] = inputChar;
 }
 
 int countElements(){

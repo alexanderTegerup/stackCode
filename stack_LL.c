@@ -31,7 +31,7 @@ struct node* top = NULL;
 //Methods for testing
 char getTop();
 void makeStackEmpty();
-void addTestElements(char);
+void addTestElements(char,int);
 int countElements();
 // --------------------
 
@@ -144,16 +144,26 @@ void makeStackEmpty(){
     }
 }
 
-void addTestElements(char inputChar){
-    struct node* firstNode = (struct node*) malloc( sizeof(struct node) );
-    firstNode->element = inputChar;
-    firstNode->pNodeBelow = NULL;
+void addTestElements(char inputChar,int numNodes){
 
-    struct node* secondNode = (struct node*) malloc( sizeof(struct node) );
-    secondNode->element = 'a';
-    secondNode->pNodeBelow = firstNode;
+    for(int i=0; i<numNodes; i++){
 
-    top = secondNode;
+        if(top == NULL){
+            top = (struct node*) malloc( sizeof(struct node) );
+	    top->element = 'a' + (rand()%26);
+            top->pNodeBelow = NULL;
+        }else{
+	    // Creating a new node at each iteration:
+	    struct node* newNode = (struct node*) malloc( sizeof(struct node) );
+            newNode->element = 'a' + (rand()%26);
+	    // Making the new node referencing to the node below in the stack, which is top:
+            newNode->pNodeBelow = top; 
+
+	    top = newNode; // Updating top
+        }
+    }
+    top->element = inputChar;
+
 }
 
 int countElements(){ // Returns the number of elements on the stack.

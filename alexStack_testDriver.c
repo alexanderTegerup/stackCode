@@ -2,8 +2,14 @@
  * alexStack_testDriver.c
  *
  *  Created on: Mar 16, 2018
- *      Author: ATESXB
- */
+ *      Author: ATESXBi
+
+ Function addTestElements(topElement, numberOfElements) adds an arbitrary number of elements to the stack.
+ The first argument will be the character at the top of the stack and the second argument states how many
+ elements should be added to the stack. All elements added by this method are generated randomly, exept for 
+ the top element. 
+
+*/
 
 
 #include <stdio.h>
@@ -13,21 +19,17 @@
 #include "stack_LL.c"
 
 void test_push();
-void test_printAll();
 void test_pop();
-void test_isFull();
-void test_isEmpty();
+
 
 int main(){
 
     test_push();
     test_pop();
-  //  test_isFull();
-   // test_isEmpty();
-    //test_printAll();
 
     return 0;
 }
+
 
 
 void test_push(){
@@ -58,13 +60,14 @@ void test_push(){
 
 void test_pop(){
 
-    // *** Pop an element from the stack ***
+    // *** Pop an element from a stack with two elements ***
 
     // Arrange
     makeStackEmpty();
     char inputChar;
     inputChar = 'a' + (rand()%26); //Inserting a random character from a-z.
-    addTestElements(inputChar);
+    addTestElements(inputChar,1);
+    addTestElements('a' + (rand()%26), 1);
 
     // Act
     pop();
@@ -76,10 +79,25 @@ void test_pop(){
 	printf("Pop from stack: failed\n");
     }
 
+    // *** Pop an element from a stack with four elements ***
 
+    // Arrange
 
-    // *** Don't pop an element from an empty stack ***
-    
+    // --- Making 'inputChar' the element just below the top element on the stack ---
+    addTestElements(inputChar,3); 
+    addTestElements('a'+(rand()%26), 1);
+
+    //Act
+    pop();
+
+    // Assert
+    if(getTop() == inputChar){
+        printf("Pop from stack: succeed\n");
+    }else{
+        printf("Pop from stack: failed\n");
+    }
+
+    // *** Don't pop an element from an empty stack ***    
     // Arrange
     makeStackEmpty();
 
@@ -96,77 +114,9 @@ void test_pop(){
 
 }
 
-/*
-void test_isFull(){
-
-    //Arrange
-    top = SIZESTACK-1; // Making the stack full
-    bool full;
-
-    // Act
-    full = isFull();
-
-    // Assert
-    if(full){
-	printf("Testing the function that returns true if the stack is full: succeed\n");
-    }else{
-	printf("Testing the function that returns true if the stack is full: failed\n");
-    }
-
-}
-
-void test_isEmpty(){
-
-    //Arrange
-    top = -1; // Making the stack empty
-    bool empty;
-
-    // Act
-    empty = isEmpty();
-
-    // Assert
-    if(empty){
-        printf("Testing the function that returns true if the stack is empty: succeed\n");
-    }else{
-        printf("Testing the function that returns true if the stack is empty: failed\n");
-    }
-
-}
-
-void test_printAll(){
-
-    printf("Testing the printAll function ...\n");
-
-    // *** Printing out two elements ***
-
-    //Arrange
-    char elm0, elm1;
-    elm0 = 'a';
-    elm1 = 'b';
-    stack[0] = elm0;
-    stack[1] = elm1;
-    top = 1;
-
-    //Act
-    printAll();
-
-    //Assert
-    printf("'printAll' works if '%c' and '%c' is printed out above this text\n",elm1,elm0);
 
 
-    // *** Printing out an empty stack ***
 
-    //Arrange
-    top = -1;
 
-    //Act
-    printAll();
-
-    //Assert
-    printf("'printAll' works if a message saying that the stack is empty is printed out above.\n");
-
-}
-
-*/
 
 
