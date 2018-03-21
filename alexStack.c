@@ -22,8 +22,9 @@ bool isEmpty();
 
 //Methods for testing
 char getTop();
-void reset();
+void makeStackEmpty();
 void addTestElements(char);
+int countElements();
 /*
 int main()
 {
@@ -107,7 +108,7 @@ char getTop(){
     return stack[top];
 }
 
-void reset(){ // Makes the stack empty
+void makeStackEmpty(){ // Makes the stack empty
     int top = -1;    
 }
 
@@ -117,7 +118,10 @@ void addTestElements(char inputChar){
     top = 1;
 }
 
-
+int countElements(){
+    int numberElements = top+1;
+    return numberElements;
+}
 
 
 

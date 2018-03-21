@@ -30,8 +30,9 @@ struct node* top = NULL;
 
 //Methods for testing
 char getTop();
-void reset();
+void makeStackEmpty();
 void addTestElements(char);
+int countElements();
 // --------------------
 
 /*
@@ -130,14 +131,17 @@ int quit(){
 
 // *** Testing inteface ***
 
-char getTop(){
+char getTop(){ // Returns the element at the top of the stack 
     return top->element;
 }
 
-void reset(){ // Makes the stack empty
-
-    // To do here: Free memeory if there are any nodes on the stack!
-    struct node* top = NULL;
+void makeStackEmpty(){ 
+    struct node* tmp;
+    while( top != NULL ){ 
+        tmp = top;
+        top = top->pNodeBelow;
+        free(tmp);
+    }
 }
 
 void addTestElements(char inputChar){
@@ -151,5 +155,19 @@ void addTestElements(char inputChar){
 
     top = secondNode;
 }
+
+int countElements(){ // Returns the number of elements on the stack.
+    int numberElements = 0;
+    struct node* tmp;
+    while( top != NULL ){  
+	tmp = top;
+	top = top->pNodeBelow;
+        free(tmp);
+	numberElements++;
+    }
+    return numberElements;
+}
+
+
 
 
