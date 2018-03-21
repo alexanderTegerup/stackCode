@@ -7,7 +7,7 @@
  Function addTestElements(topElement, numberOfElements) adds an arbitrary number of elements to the stack.
  The first argument will be the character at the top of the stack and the second argument states how many
  elements should be added to the stack. All elements added by this method are generated randomly, exept for 
- the top element. 
+ the top element. Elements are added above the current top-element. 
 
 */
 
@@ -15,8 +15,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-//#include "alexStack.c"
-#include "stack_LL.c"
+#define LARGENUMBER 10000000 //Ten milion
+
+#include "alexStack.c"
+//#include "stack_LL.c"
+
 
 void test_push();
 void test_pop();
@@ -34,10 +37,8 @@ int main(){
 
 void test_push(){
 
-    // *** Push to the stack ***   
-
+    // *** Push to an empty stack ***   
     // Arrange
-
     makeStackEmpty();
     char inputChar;
     inputChar = 'a' + (rand()%26); //Inserting a random character from a-z. 
@@ -46,14 +47,33 @@ void test_push(){
     push(inputChar); //Push to the top of the stack.
 
     //Asert
-
-    if( inputChar == getTop() ){
+    if( inputChar == getTopElement() ){
         printf("Push to stack: succeed\n");
     }else{
         printf("Push to stack: failed\n");
     }
 
-    // Add to a full stack
+
+    // *** Don't add to a full stack ***
+    // Arrange
+    int sizeStack = getSizeStack();
+    char topElement = 'T';
+    inputChar = 'i';
+    makeStackFull();
+    insertElement(topElement,sizeStack); //Adding a known element to the top of the stack
+
+    // Act
+    push(inputChar);
+
+    // Assert
+    if(sizeStack >= LARGENUMBER){
+	printf("Don't add to a full stack: (practically) no memory limitation\n");
+    }
+    else if( countElements() == sizeStack && getTopElement() != inputChar ){
+	printf("Don't add to a full stack: succeed\n");
+    }else{
+	printf("Don't add to a full stack: failed\n");
+    }
 
 }
 
@@ -73,7 +93,7 @@ void test_pop(){
     pop();
     
     // Assert
-    if(getTop() == inputChar){
+    if(getTopElement() == inputChar){
         printf("Pop from stack: succeed\n");
     }else{
 	printf("Pop from stack: failed\n");
@@ -91,7 +111,7 @@ void test_pop(){
     pop();
 
     // Assert
-    if(getTop() == inputChar){
+    if(getTopElement() == inputChar){
         printf("Pop from stack: succeed\n");
     }else{
         printf("Pop from stack: failed\n");

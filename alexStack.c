@@ -21,10 +21,13 @@ bool isFull();
 bool isEmpty();
 
 //Methods for testing
-char getTop();
+char getTopElement();
 void makeStackEmpty();
+void makeStackFull();
 void addTestElements(char,int);
 int countElements();
+int getSizeStack();
+void insertElement(char,int);
 /*
 int main()
 {
@@ -102,9 +105,10 @@ bool isEmpty(){
 }
 
 
+
 // *** Testing inteface ***
 
-char getTop(){
+char getTopElement(){
     return stack[top];
 }
 
@@ -127,7 +131,18 @@ int countElements(){
     return numberElements;
 }
 
+int getSizeStack(){
+    return SIZESTACK; 
+}
 
+void makeStackFull(){
+    top = SIZESTACK-1;    
+    return;
+}
 
+void insertElement(char inputChar, int index){
+    stack[index-1] = inputChar;
+    return;
+}
 
 

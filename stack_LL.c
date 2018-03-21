@@ -29,10 +29,13 @@ struct node{
 struct node* top = NULL;
 
 //Methods for testing
-char getTop();
+char getTopElement();
 void makeStackEmpty();
+void makeStackFull();
 void addTestElements(char,int);
 int countElements();
+int getSizeStack();
+void insertElement(char,int);
 // --------------------
 
 /*
@@ -131,7 +134,7 @@ int quit(){
 
 // *** Testing inteface ***
 
-char getTop(){ // Returns the element at the top of the stack 
+char getTopElement(){ // Returns the element at the top of the stack 
     return top->element;
 }
 
@@ -178,6 +181,19 @@ int countElements(){ // Returns the number of elements on the stack.
     return numberElements;
 }
 
+int getSizeStack(){
+    return LARGENUMBER;
+}
 
+void makeStackFull(){
+    return;
+}
+
+void insertElement(char inputChar,int index){
+    if(top!=NULL){
+        top->element = inputChar;
+    }
+    return;
+}
 
 
