@@ -21,13 +21,14 @@ bool isFull();
 bool isEmpty();
 
 //Methods for testing
-char getTopElement();
-void makeStackEmpty();
-void makeStackFull();
-void addTestElements(char,int);
-int countElements();
-int getSizeStack();
-void insertElement(char,int);
+char getTopElement(); //check
+void makeStackEmpty(); // check
+void makeStackFull(); // check
+void addTestElements(char,int); // check
+int countElements(); // check
+int getSizeStack(); // check
+void setTopElement(char);//check
+bool isEmpty_test(); // check
 /*
 int main()
 {
@@ -109,7 +110,12 @@ bool isEmpty(){
 // *** Testing inteface ***
 
 char getTopElement(){
-    return stack[top];
+    if(top != -1){
+        return stack[top];
+    }else{
+	printf("TD: No elements on the stack. Returning 1\n");
+        return '1';
+    }
 }
 
 void makeStackEmpty(){ // Makes the stack empty
@@ -118,12 +124,20 @@ void makeStackEmpty(){ // Makes the stack empty
 
 void addTestElements(char inputChar, int numElements){
 
-    for(int i=1; i<numElements; i++){
-	top++;
-        stack[top] = 'a' + (rand()%26);
+    for(int i=0; i<numElements; i++){
+	if(top == SIZESTACK-1){
+	    stack[top] = inputChar;
+	    return;
+	}
+	else if(i == numElements-1){
+	    top++;
+	    stack[top] = inputChar;
+            return;
+	}else{
+	    top++;
+            stack[top] = 'a' + (rand()%26);
+	}
     }
-    top++;
-    stack[top] = inputChar;
 }
 
 int countElements(){
@@ -140,9 +154,11 @@ void makeStackFull(){
     return;
 }
 
-void insertElement(char inputChar, int index){
-    stack[index-1] = inputChar;
+void setTopElement(char inputChar){
+    stack[top] = inputChar;
     return;
 }
 
-
+bool isEmpty_test(){
+    return (top==-1);
+}

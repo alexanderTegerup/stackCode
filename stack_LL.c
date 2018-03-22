@@ -29,13 +29,14 @@ struct node{
 struct node* top = NULL;
 
 //Methods for testing
-char getTopElement();
-void makeStackEmpty();
-void makeStackFull();
-void addTestElements(char,int);
-int countElements();
-int getSizeStack();
-void insertElement(char,int);
+char getTopElement(); // check
+void makeStackEmpty(); // check
+void makeStackFull(); // doesn't do anything in this implementation
+void addTestElements(char,int); // check
+int countElements(); // removes elements after counting them
+int getSizeStack(); // check
+void setTopElement(char); 
+bool isEmpty_test();
 // --------------------
 
 /*
@@ -134,8 +135,13 @@ int quit(){
 
 // *** Testing inteface ***
 
-char getTopElement(){ // Returns the element at the top of the stack 
-    return top->element;
+char getTopElement(){ // Returns the element at the top of the stack, if it exist.
+    if(top!=NULL){ 
+        return top->element;
+    }else{
+        printf("No elements on the stack. Returning 1\n");
+        return '1';
+    }
 }
 
 void makeStackEmpty(){ 
@@ -189,11 +195,16 @@ void makeStackFull(){
     return;
 }
 
-void insertElement(char inputChar,int index){
+void setTopElement(char inputChar){
     if(top!=NULL){
         top->element = inputChar;
     }
     return;
 }
+
+bool isEmpty_test(){
+    return (top == NULL);
+}
+
 
 
