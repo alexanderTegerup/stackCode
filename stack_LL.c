@@ -32,7 +32,7 @@ struct node* top = NULL;
 char getTopElement(); // check
 void makeStackEmpty(); // check
 void makeStackFull(); // doesn't do anything in this implementation
-void addTestElements(char,int); // check
+void addTestElements(int); // check
 int countElements(); // removes elements after counting them
 int getSizeStack(); // check
 void setTopElement(char); 
@@ -153,7 +153,7 @@ void makeStackEmpty(){
     }
 }
 
-void addTestElements(char inputChar,int numNodes){
+void addTestElements(int numNodes){
 
     for(int i=0; i<numNodes; i++){
 
@@ -171,7 +171,6 @@ void addTestElements(char inputChar,int numNodes){
 	    top = newNode; // Updating top
         }
     }
-    top->element = inputChar;
 
 }
 

@@ -24,7 +24,7 @@ bool isEmpty();
 char getTopElement(); //check
 void makeStackEmpty(); // check
 void makeStackFull(); // check
-void addTestElements(char,int); // check
+void addTestElements(int); // check
 int countElements(); // check
 int getSizeStack(); // check
 void setTopElement(char);//check
@@ -122,16 +122,16 @@ void makeStackEmpty(){ // Makes the stack empty
     top = -1;    
 }
 
-void addTestElements(char inputChar, int numElements){
+void addTestElements(int numElements){
 
     for(int i=0; i<numElements; i++){
 	if(top == SIZESTACK-1){
-	    stack[top] = inputChar;
+	    stack[top] = 'a' + (rand()%26);
 	    return;
 	}
 	else if(i == numElements-1){
 	    top++;
-	    stack[top] = inputChar;
+	    stack[top] = 'a' + (rand()%26);
             return;
 	}else{
 	    top++;

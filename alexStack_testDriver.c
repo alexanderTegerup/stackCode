@@ -4,13 +4,9 @@
  *  Created on: Mar 16, 2018
  *      Author: ATESXBi
 
- Function addTestElements(topElement, numberOfElements) adds an arbitrary number of elements to the stack.
- The first argument will be the character at the top of the stack after adding the elements, and the second 
-argument states how many elements should be added to the stack. All elements added by this method are 
-generated randomly, exept for the element added at the top. The elements are added above previously added elements. 
+ Function addTestElements(numberOfElements) adds an arbitrary number of elements to the stack.
+ All elements added by this method are generated randomly. The elements are added above previously added elements. 
 
-Using addTestElements(...) to add one element to a full stack will replace the top element with the element 
-provided by the user. 
 */
 
 
@@ -19,8 +15,8 @@ provided by the user.
 
 #define LARGENUMBER 10000000 //Ten milion
 
-//#include "alexStack.c"
-#include "stack_LL.c"
+#include "alexStack.c"
+//#include "stack_LL.c"
 
 
 void test_push();
@@ -61,10 +57,8 @@ void test_push(){
 
     //Arrange
     makeStackEmpty();
-    char elmUnderTop = 'b';
-    inputChar = 'a';
     int numberElements = 3;
-    addTestElements(elmUnderTop,numberElements);
+    addTestElements(numberElements);
 
     // Act
     push(inputChar);
@@ -107,8 +101,9 @@ void test_pop(){
     // Arrange
     makeStackEmpty();
     char inputChar;
+    int numberElm = 1;
     inputChar = 'a' + (rand()%26); //Inserting a random character from a-z.
-    addTestElements(inputChar,1);
+    addTestElements(numberElm);
 
     // Act
     pop();
@@ -125,9 +120,10 @@ void test_pop(){
     // Arrange
     makeStackEmpty();
     inputChar = 'a' + (rand()%26); //Inserting a random character from a-z.
-    addTestElements(inputChar,1);
-    addTestElements('a' + (rand()%26), 1);
-
+    addTestElements(1);
+    setTopElement(inputChar);
+    addTestElements(1);
+    setTopElement('T');
     // Act
     pop();
     
@@ -144,9 +140,10 @@ void test_pop(){
 
     // --- Making 'inputChar' the element just below the top element on the stack ---
     makeStackEmpty();
-    addTestElements(inputChar,3);
+    addTestElements(3);
     setTopElement(inputChar); 
-    addTestElements('a'+(rand()%26), 1);
+    addTestElements(1);
+    setTopElement('T');
 
     //Act
     pop();
