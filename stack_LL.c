@@ -74,7 +74,6 @@ void push(char testInput){ // Added argumnet for testing purposes
 //    printf("Enter element on the stack: \n");
  //   scanf("%c",&elm);
   //  getchar();
-
     if(isEmpty()){
 	top = (struct node*) malloc( sizeof(struct node) );
 	top->element = elm;

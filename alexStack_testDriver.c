@@ -15,8 +15,8 @@
 
 #define LARGENUMBER 10000000 //Ten milion
 
-#include "alexStack.c"
-//#include "stack_LL.c"
+//#include "alexStack.c"
+#include "stack_LL.c"
 
 
 void test_push();
