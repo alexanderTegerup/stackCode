@@ -5,25 +5,22 @@
  *      Author: ATESXB
  */
 
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <stdbool.h>
 
-
-
 void push(char);
-void pop();
+char pop();
 void printAll();
 
 bool isEmpty();
 bool oneElementLeft();
 int quit();
 
-struct node{
-    char element;
-    struct node* pNodeBelow;
+struct node {
+	char element;
+	struct node* pNodeBelow;
 };
 
 struct node* top = NULL;
@@ -35,174 +32,177 @@ void makeStackFull(); // doesn't do anything in this implementation
 void addTestElements(int); // check
 int countElements(); // removes elements after counting them
 int getSizeStack(); // check
-void setTopElement(char); 
+void setTopElement(char);
 bool isEmpty_test();
 // --------------------
 
-/*
-int main(){
+int main() {
 
-    int option;
-    int runProgram = 1;
+	int option;
+	int runProgram = 1;
+	char elm, popedElm;
 
-    while(runProgram){
+	while (runProgram) {
 
-        printf(" 1: Add an element to the stack\n 2: Delete an element on the stack\n 3: Print out all elements on the stack\n 4: Exit\n");
-        scanf("%d",&option);
-        getchar();
+		printf(
+				" 1: Add an element to the stack\n 2: Delete an element on the stack\n 3: Print out all elements on the stack\n 4: Exit\n");
+		scanf("%d", &option);
+		getchar();
 
-            switch(option){
-                case 1 : push();
-                    break;
-                case 2 : pop();
-                    break;
-                case 3 : printAll();
-                    break;
-                case 4 : runProgram = quit();
-                    break;
-                default : printf("You have to enter an integer between 1-5.\n");
-            }
-    }
-    return 0;
-}
-*/
-
-void push(char testInput){ // Added argumnet for testing purposes
-
-    char elm;
-    elm = testInput; // Added for testing 
-//    printf("Enter element on the stack: \n");
-//    scanf("%c",&elm);
-//    getchar();
-    if(isEmpty()){
-	top = (struct node*) malloc( sizeof(struct node) );
-	top->element = elm;
-        top->pNodeBelow = NULL;
-    }else{
-	struct node* pTopNode;
-	pTopNode = (struct node*) malloc( sizeof(struct node) );
-
-	pTopNode->element = elm;
-	pTopNode->pNodeBelow = top;
-	top = pTopNode;	
-    }
-
-}
-
-void pop(){
-
-    if(isEmpty()){
-	printf("Nothing to pop. The stack is empty.\n");
-    }
-    else if(oneElementLeft()){
-	free(top);
-	top=NULL;	
-    }
-    else{
-	struct node* tmp = top;
-	top = tmp->pNodeBelow;
-	free(tmp);
-    }
-}
-
-
-void printAll(){
-
-    if(isEmpty()){
-	printf("Stack is empty. Hence, nothing can be printed out.\n");
-    }else{
-        while(!isEmpty()){
-            printf("Top element: %c\n",top->element);
-	    pop();
+		switch (option) {
+		case 1:
+			printf("Enter element on the stack: \n");
+			scanf("%c",&elm);
+			getchar();
+			push(elm);
+			break;
+		case 2:
+			popedElm = pop();
+			printf("The element removed from the stack is: %c\n",popedElm);
+			break;
+		case 3:
+			printAll();
+			break;
+		case 4:
+			runProgram = quit();
+			break;
+		default:
+			printf("You have to enter an integer between 1-5.\n");
+		}
 	}
-    }
+	return 0;
 }
 
-bool isEmpty(){
-    return (top == NULL);
+void push(char elm) { 
+
+	if (isEmpty()) {
+		top = (struct node*) malloc(sizeof(struct node));
+		top->element = elm;
+		top->pNodeBelow = NULL;
+	} else {
+		struct node* pTopNode;
+		pTopNode = (struct node*) malloc(sizeof(struct node));
+
+		pTopNode->element = elm;
+		pTopNode->pNodeBelow = top;
+		top = pTopNode;
+	}
+
 }
 
-bool oneElementLeft(){
-    return (top->pNodeBelow == NULL);
+char pop() {
+
+	if (isEmpty()) {
+		printf("Nothing to pop. The stack is empty.\n");
+		return ' ';
+	} else if (oneElementLeft()) {
+		char tmpChar = top->element;
+		free(top);
+		top = NULL;
+		return tmpChar;
+	} else {
+		struct node* tmp = top;
+		char tmpChar = top->element;
+		top = tmp->pNodeBelow;
+		free(tmp);
+		return tmpChar;
+	}
 }
 
-int quit(){
-    free(top);
-    return 0;
+void printAll() {
+
+	if (isEmpty()) {
+		printf("Stack is empty. Hence, nothing can be printed out.\n");
+	} else {
+		while (!isEmpty()) {
+			printf("Top element: %c\n", top->element);
+			pop();
+		}
+	}
 }
 
+bool isEmpty() {
+	return (top == NULL);
+}
+
+bool oneElementLeft() {
+	return (top->pNodeBelow == NULL);
+}
+
+int quit() {
+	free(top);
+	return 0;
+}
 
 // *** Testing inteface ***
 
-char getTopElement(){ // Returns the element at the top of the stack, if it exist.
-    if(top!=NULL){ 
-        return top->element;
-    }else{
-        printf("No elements on the stack. Returning 1\n");
-        return '1';
-    }
+char getTopElement() { // Returns the element at the top of the stack, if it exist.
+	if (top != NULL) {
+		return top->element;
+	} else {
+		printf("No elements on the stack. Returning 1\n");
+		return '1';
+	}
 }
 
-void makeStackEmpty(){ 
-    struct node* tmp;
-    while( top != NULL ){ 
-        tmp = top;
-        top = top->pNodeBelow;
-        free(tmp);
-    }
+void makeStackEmpty() {
+	struct node* tmp;
+	while (top != NULL) {
+		tmp = top;
+		top = top->pNodeBelow;
+		free(tmp);
+	}
 }
 
-void addTestElements(int numNodes){
+void addTestElements(int numNodes) {
 
-    for(int i=0; i<numNodes; i++){
+	for (int i = 0; i < numNodes; i++) {
 
-        if(top == NULL){
-            top = (struct node*) malloc( sizeof(struct node) );
-	    top->element = 'a' + (rand()%26);
-            top->pNodeBelow = NULL;
-        }else{
-	    // Creating a new node at each iteration:
-	    struct node* newNode = (struct node*) malloc( sizeof(struct node) );
-            newNode->element = 'a' + (rand()%26);
-	    // Making the new node referencing to the node below in the stack, which is top:
-            newNode->pNodeBelow = top; 
+		if (top == NULL) {
+			top = (struct node*) malloc(sizeof(struct node));
+			top->element = 'a' + (rand() % 26);
+			top->pNodeBelow = NULL;
+		} else {
+			// Creating a new node at each iteration:
+			struct node* newNode = (struct node*) malloc(sizeof(struct node));
+			newNode->element = 'a' + (rand() % 26);
+			// Making the new node referencing to the node below in the stack, which is top:
+			newNode->pNodeBelow = top;
 
-	    top = newNode; // Updating top
-        }
-    }
+			top = newNode; // Updating top
+		}
+	}
 
 }
 
-int countElements(){ // Returns the number of elements on the stack.
-    int numberElements = 0;
-    struct node* tmp;
-    while( top != NULL ){  
-	tmp = top;
-	top = top->pNodeBelow;
-        free(tmp);
-	numberElements++;
-    }
-    return numberElements;
+int countElements() { // Returns the number of elements on the stack.
+	int numberElements = 0;
+	struct node* tmp;
+	while (top != NULL) {
+		tmp = top;
+		top = top->pNodeBelow;
+		free(tmp);
+		numberElements++;
+	}
+	return numberElements;
+}
+/*
+int getSizeStack() {
+	return LARGENUMBER;
+}
+*/
+void makeStackFull() {
+	return;
 }
 
-int getSizeStack(){
-    return LARGENUMBER;
+void setTopElement(char inputChar) {
+	if (top != NULL) {
+		top->element = inputChar;
+	}
+	return;
 }
 
-void makeStackFull(){
-    return;
+bool isEmpty_test() {
+	return (top == NULL);
 }
-
-void setTopElement(char inputChar){
-    if(top!=NULL){
-        top->element = inputChar;
-    }
-    return;
-}
-
-bool isEmpty_test(){
-    return (top == NULL);
-}
-
-
 
