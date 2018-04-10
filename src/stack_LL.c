@@ -29,12 +29,13 @@ struct node* top = NULL;
 char getTopElement(); // check
 void makeStackEmpty(); // check
 void makeStackFull(); // doesn't do anything in this implementation
-void addTestElements(int); // check
+void pushTestElem(char); // check
 int countElements(); // removes elements after counting them
 int getSizeStack(); // check
 void setTopElement(char);
 bool isEmpty_test();
 // --------------------
+#if TEST!=1 
 
 int main() {
 
@@ -72,6 +73,8 @@ int main() {
 	}
 	return 0;
 }
+#endif
+
 
 void push(char elm) { 
 
@@ -154,24 +157,21 @@ void makeStackEmpty() {
 	}
 }
 
-void addTestElements(int numNodes) {
-
-	for (int i = 0; i < numNodes; i++) {
+void pushTestElem(char elem) {
 
 		if (top == NULL) {
 			top = (struct node*) malloc(sizeof(struct node));
-			top->element = 'a' + (rand() % 26);
+			top->element = elem;
 			top->pNodeBelow = NULL;
 		} else {
 			// Creating a new node at each iteration:
 			struct node* newNode = (struct node*) malloc(sizeof(struct node));
-			newNode->element = 'a' + (rand() % 26);
+			newNode->element = elem;
 			// Making the new node referencing to the node below in the stack, which is top:
 			newNode->pNodeBelow = top;
 
 			top = newNode; // Updating top
 		}
-	}
 
 }
 
@@ -186,11 +186,11 @@ int countElements() { // Returns the number of elements on the stack.
 	}
 	return numberElements;
 }
-/*
+
 int getSizeStack() {
 	return LARGENUMBER;
 }
-*/
+
 void makeStackFull() {
 	return;
 }

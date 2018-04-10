@@ -57,10 +57,14 @@ void test_push(){
 
     //Arrange
     makeStackEmpty();
-    int numberElements = 3;
-    addTestElements(numberElements);
+    int numberElem = 3;
+    for(int i=0; i<numberElem; i++){
+	inputChar = (char) (i+'a');
+        pushTestElem(inputChar);
+    }
 
     // Act
+    inputChar = (char) (numberElem + 'a');
     push(inputChar);
 
     // Assert
@@ -69,6 +73,7 @@ void test_push(){
     }else{
         printf("TD: Push to stack with three elements already: failed\n");
     }
+
 
     // *** Don't add to a full stack ***
     // Arrange
@@ -83,12 +88,12 @@ void test_push(){
 
     // Assert
     if(sizeStack >= LARGENUMBER){
-	printf("TD: Don't add to a full stack: (practically) no memory limitation with this implementation of the stack\n");
+	printf("TD: Don't add to a full stack: (practically) no memory limitation with this implementation of the stack\n\n");
     }
     else if( countElements() == sizeStack && getTopElement() != inputChar ){
-	printf("TD: Don't add to a full stack: succeed\n");
+	printf("TD: Don't add to a full stack: succeed\n\n");
     }else{
-	printf("TD: Don't add to a full stack: failed\n");
+	printf("TD: Don't add to a full stack: failed\n\n");
     }
 
 }
@@ -100,10 +105,10 @@ void test_pop(){
 
     // Arrange
     makeStackEmpty();
-    char inputChar;
-    int numberElm = 1;
+    char inputChar, popedChar;
+    int numberElm;
     inputChar = 'a' + (rand()%26); //Inserting a random character from a-z.
-    addTestElements(numberElm);
+    pushTestElem(inputChar);
 
     // Act
     pop();
@@ -118,44 +123,52 @@ void test_pop(){
     // *** Pop an element from a stack with two elements ***
 
     // Arrange
+    numberElm = 2;
     makeStackEmpty();
-    inputChar = 'a' + (rand()%26); //Inserting a random character from a-z.
-    addTestElements(1);
-    setTopElement(inputChar);
-    addTestElements(1);
-    setTopElement('T');
+    for(int i=0; i<numberElm; i++){
+	inputChar = (char) (i+'a');
+	pushTestElem(inputChar);
+    }
+    inputChar = (char) ('a' + numberElm); 
+    pushTestElem(inputChar);
+
     // Act
-    pop();
+    popedChar = pop();
     
     // Assert
-    if(getTopElement() == inputChar){
+    if(popedChar == inputChar){
         printf("TD: Pop from a stack with two elements: succeed\n");
     }else{
 	printf("TD: Pop from a stack with two elements: failed\n");
     }
 
+
     // *** Pop an element from a stack with four elements ***
 
     // Arrange
-
-    // --- Making 'inputChar' the element just below the top element on the stack ---
+    numberElm = 4;
     makeStackEmpty();
-    addTestElements(3);
-    setTopElement(inputChar); 
-    addTestElements(1);
-    setTopElement('T');
+    for(int i=0; i<numberElm; i++){
+        inputChar = (char) (i+'a');
+        pushTestElem(inputChar);
+    }
+    inputChar = (char) ('a' + numberElm);
+    pushTestElem(inputChar);
 
-    //Act
-    pop();
+    // Act
+    popedChar = pop();
 
     // Assert
-    if(getTopElement() == inputChar){
+    if(popedChar == inputChar){
         printf("TD: Pop from a stack with four elements: succeed\n");
     }else{
         printf("TD: Pop from a stack with four elements: failed\n");
     }
 
+
+
     // *** Don't pop an element from an empty stack ***    
+
     // Arrange
     makeStackEmpty();
 
@@ -168,8 +181,6 @@ void test_pop(){
     }else{
         printf("TD: Don't pop an element from an empty stack: failed\n");
     }
-
-
 }
 
 

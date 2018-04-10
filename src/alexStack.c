@@ -9,7 +9,7 @@
 #include <string.h>
 #include <stdbool.h>
 
-#define SIZESTACK 4
+#define SIZESTACK 6
 
 int top = -1; // The top of the stack, initialized for an empty stack.
 char stack[SIZESTACK];
@@ -24,12 +24,13 @@ bool isEmpty();
 char getTopElement(); //check
 void makeStackEmpty(); // check
 void makeStackFull(); // check
-void addTestElements(int); // check
+void pushTestElem(char); // check
 int countElements(); // check
 int getSizeStack(); // check
 void setTopElement(char); //check
 bool isEmpty_test(); // check
 
+#if TEST != 1
 int main() {
 	int option;
 	int runProgram = 1;
@@ -66,13 +67,14 @@ int main() {
 	}
 	return 0;
 }
+#endif
 
 void push(char inputElm) { 
 
 	if (isFull()) {
 		printf("Can't add another element, because the stack is full\n");
 	} else {
-		printf("You inserted the element: %c\n\n", inputElm);
+		printf("You inserted the element: %c\n", inputElm);
 		top++;
 		stack[top] = inputElm;
 	}
@@ -127,21 +129,15 @@ void makeStackEmpty() { // Makes the stack empty
 	top = -1;
 }
 
-void addTestElements(int numElements) {
+void pushTestElem(char elem) {
 
-	for (int i = 0; i < numElements; i++) {
-		if (top == SIZESTACK - 1) {
-			stack[top] = 'a' + (rand() % 26);
-			return;
-		} else if (i == numElements - 1) {
-			top++;
-			stack[top] = 'a' + (rand() % 26);
-			return;
-		} else {
-			top++;
-			stack[top] = 'a' + (rand() % 26);
-		}
+	if (top >= SIZESTACK - 1) {
+		printf("TD: Stack is full\n");
+	} else {
+		top++;
+		stack[top] = elem;
 	}
+	
 }
 
 int countElements() {
