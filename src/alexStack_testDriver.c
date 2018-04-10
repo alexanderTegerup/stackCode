@@ -4,16 +4,12 @@
  *  Created on: Mar 16, 2018
  *      Author: ATESXBi
 
- Function addTestElements(numberOfElements) adds an arbitrary number of elements to the stack.
- All elements added by this method are generated randomly. The elements are added above previously added elements. 
-
 */
 
 
 #include <stdio.h>
 #include <stdlib.h>
 
-#define LARGENUMBER 10000000 //Ten milion
 
 #include "alexStack.c"
 //#include "stack_LL.c"

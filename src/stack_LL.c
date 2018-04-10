@@ -34,6 +34,8 @@ int countElements(); // removes elements after counting them
 int getSizeStack(); // check
 void setTopElement(char);
 bool isEmpty_test();
+
+#define LARGENUMBER 10000000 //Ten milion
 // --------------------
 #if TEST!=1 
 
@@ -133,7 +135,13 @@ bool oneElementLeft() {
 }
 
 int quit() {
-	free(top);
+	struct node* tmp;
+        while (top != NULL) {
+                tmp = top;
+                top = top->pNodeBelow;
+                free(tmp);
+	}
+
 	return 0;
 }
 
@@ -187,9 +195,11 @@ int countElements() { // Returns the number of elements on the stack.
 	return numberElements;
 }
 
+
 int getSizeStack() {
 	return LARGENUMBER;
 }
+
 
 void makeStackFull() {
 	return;
@@ -205,4 +215,7 @@ void setTopElement(char inputChar) {
 bool isEmpty_test() {
 	return (top == NULL);
 }
+
+
+
 

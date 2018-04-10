@@ -30,6 +30,9 @@ int getSizeStack(); // check
 void setTopElement(char); //check
 bool isEmpty_test(); // check
 
+#define LARGENUMBER 10000000 //Ten milion
+//--------------------------------
+
 #if TEST != 1
 int main() {
 	int option;
